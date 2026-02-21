@@ -1,0 +1,16 @@
+{
+  "@context": ["https://schema.org", { "atproto": "https://atproto.com/ns#" }],
+  "@type": "Article",
+  "headline": "",
+  "description": "",
+  "datePublished": "",
+  "image": [],
+  "author": {
+    "@type": "Person",
+    "name": "",
+    "url": "",
+    "atproto:did": "",
+    "atproto:handle": ""
+  },
+  "atproto:feed": ""
+}

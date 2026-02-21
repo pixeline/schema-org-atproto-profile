@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How atproto handles identity — Example Blog</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": ["https://schema.org", { "atproto": "https://atproto.com/ns#" }],
+    "@type": "Article",
+    "headline": "How atproto handles identity",
+    "description": "A deep dive into DIDs, handles, and the AT Protocol identity layer.",
+    "datePublished": "2025-06-01",
+    "image": [
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Alice Dubois",
+      "url": "https://bsky.app/profile/alice.bsky.social",
+      "atproto:did": "did:plc:abc123xyz456",
+      "atproto:handle": "alice.bsky.social"
+    },
+    "atproto:feed": "at://did:plc:abc123xyz456/app.bsky.feed.generator/atproto-news"
+  }
+  </script>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>How atproto handles identity</h1>
+      <p class="byline">By Alice Dubois &mdash; June 1, 2025</p>
+
+      <p>
+        The AT Protocol takes a fundamentally different approach to identity compared to
+        traditional web platforms. Instead of tying your identity to a single company's
+        server, atproto uses <strong>Decentralised Identifiers (DIDs)</strong> as the
+        stable, permanent anchor of who you are.
+      </p>
+
+      <p>
+        Your DID is something like <code>did:plc:abc123xyz456</code>. It never changes,
+        even if you move your data to a different Personal Data Server (PDS). Your
+        <em>handle</em> — the human-readable part like <code>alice.bsky.social</code>
+        — is just a pointer that resolves to your DID via DNS or HTTPS.
+      </p>
+
+      <p>
+        This separation means that if your hosting provider disappears tomorrow, you can
+        migrate your DID to a new PDS and your followers will follow automatically.
+        The identity layer is decoupled from the social graph.
+      </p>
+    </article>
+
+    <section id="card-section">
+      <h2>URL Card Preview</h2>
+      <p>The card below is built from the JSON-LD embedded in this page's <code>&lt;head&gt;</code>.</p>
+      <div id="card"></div>
+    </section>
+  </main>
+
+  <script src="card-demo.js"></script>
+</body>
+</html>
