@@ -1,0 +1,151 @@
+/* ── Reset & base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f4f4f5;
+  color: #18181b;
+  line-height: 1.6;
+  padding: 2rem 1rem;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Article ──────────────────────────────────────────────────────── */
+article {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  margin-bottom: 2.5rem;
+}
+
+article h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.byline {
+  font-size: .875rem;
+  color: #71717a;
+  margin-bottom: 1.25rem;
+}
+
+article p {
+  margin-bottom: 1rem;
+}
+
+article p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Section heading ──────────────────────────────────────────────── */
+#card-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #52525b;
+  margin-bottom: .5rem;
+}
+
+#card-section > p {
+  font-size: .875rem;
+  color: #71717a;
+  margin-bottom: 1rem;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  border: 1px solid #e4e4e7;
+  max-width: 480px;
+}
+
+.card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.card__body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: .4rem;
+  color: #18181b;
+}
+
+.card__description {
+  font-size: .875rem;
+  color: #52525b;
+  margin-bottom: .75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__author {
+  font-size: .8125rem;
+  color: #71717a;
+}
+
+/* ── atproto enhancement ──────────────────────────────────────────── */
+.card--atproto {
+  border-color: #0085ff;
+}
+
+.card--atproto .card__body {
+  border-top: 3px solid #0085ff;
+}
+
+.card__atproto-meta {
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px solid #f4f4f5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center;
+  font-size: .75rem;
+}
+
+.card__atproto-badge {
+  background: #0085ff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  font-size: .6875rem;
+}
+
+.card__atproto-handle {
+  color: #0085ff;
+  font-weight: 500;
+}
+
+.card__atproto-did {
+  color: #a1a1aa;
+  font-family: ui-monospace, monospace;
+}
+
+.card__atproto-feed {
+  color: #0085ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.card__atproto-feed:hover {
+  text-decoration: underline;
+}
