@@ -37,15 +37,15 @@
   const isAtproto = hasAtprotoContext(data["@context"]);
 
   // ── 3. Extract fields ─────────────────────────────────────────────
-  const headline    = data.headline    || "";
+  const headline = data.headline || "";
   const description = data.description || "";
-  const images      = Array.isArray(data.image) ? data.image : (data.image ? [data.image] : []);
-  const author      = data.author      || {};
-  const authorName  = author.name      || "";
+  const images = Array.isArray(data.image) ? data.image : (data.image ? [data.image] : []);
+  const author = data.author || {};
+  const authorName = author.name || "";
 
-  const did    = author["atproto:did"]    || "";
+  const did = author["atproto:did"] || "";
   const handle = author["atproto:handle"] || "";
-  const feed   = data["atproto:feed"]     || "";
+  const feed = data["atproto:feed"] || "";
 
   const atprotoPresent = isAtproto && (did || handle || feed);
 
