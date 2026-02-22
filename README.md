@@ -76,11 +76,6 @@ Live demo (GitHub Pages):
 
 https://pixeline.github.io/schema-org-atproto-profile/
 
-Open `demo/index.html` directly in a browser (no server needed):
-
-```
-open demo/index.html
-```
 
 The page contains:
 - A fake blog article with a concrete JSON-LD block using this profile.
