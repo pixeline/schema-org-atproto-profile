@@ -82,5 +82,6 @@ The page contains:
 - A rendered URL card built by `demo/card-demo.js` from the JSON-LD on the page.
 - An **atproto badge** and extra identity line when atproto fields are present.
 
-Preview:
+## Preview:
+
 ![preview](./demo/capture.jpg)
