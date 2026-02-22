@@ -72,15 +72,17 @@ Non-atproto clients that do not recognise these fields will simply skip them.
 
 ## Demo
 
-Live demo (GitHub Pages):
-
-https://pixeline.github.io/schema-org-atproto-profile/
+[Live demo](https://pixeline.github.io/schema-org-atproto-profile/demo/)
 
 
 The page contains:
 - A fake blog article with a concrete JSON-LD block using this profile.
 - A rendered URL card built by `demo/card-demo.js` from the JSON-LD on the page.
 - An **atproto badge** and extra identity line when atproto fields are present.
+
+Preview:
+![preview](./demo/capture.jpg)
+
 
 ---
 
