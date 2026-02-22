@@ -98,6 +98,21 @@ article p:last-child {
 .card__author {
   font-size: .8125rem;
   color: #71717a;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.card__author-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+.card__author-name {
+  min-width: 0;
 }
 
 /* ── atproto enhancement ──────────────────────────────────────────── */
