@@ -40,6 +40,7 @@ The profile uses a dual `@context`:
     "@type": "Person",
     "name": "Alice Dubois",
     "url": "https://example.com/authors/alice",
+    "image": "https://example.com/images/alice.jpg",
     "atproto:did": "did:plc:abc123xyz456",
     "atproto:handle": "alice.bsky.social"
   },
@@ -53,15 +54,17 @@ The profile uses a dual `@context`:
 |---|---|---|---|
 | `atproto:did` | `author` | string | The author's atproto DID (e.g. `did:plc:…`) |
 | `atproto:handle` | `author` | string | The author's atproto handle (e.g. `alice.bsky.social`) |
-| `atproto:feed` | root | string | Optional AT URI of a feed/series (e.g. an `app.bsky.feed.generator` URI) |
+| `atproto:feed` | root | string | Optional feed/series link. Must be either an `at://` URI (e.g. `at://did:plc:abc123xyz456/app.bsky.feed.generator/atproto-news`) or an absolute `http(s)://` URL (e.g. `https://bsky.app/profile/mackuba.eu/feed/atproto`). |
 
 ---
 
 ## How clients use this
 
 1. **Detect the atproto namespace** in `@context` — look for an object containing a key whose value starts with `https://atproto.com/ns`.
-2. **Resolve author identity** — use `atproto:did` or `atproto:handle` to fetch the author's avatar, follower count, or offer a "Follow" button.
-3. **Link to a feed/series** — use `atproto:feed` to add a "More from this series" action in the URL card.
+2. **Resolve author identity** — use `atproto:did` or `atproto:handle` for identity and follow actions.
+3. **Use standard avatar first** — if `author.image` is present, use it directly.
+4. **Polyfill avatar resolution when missing** — if `author.image` is absent, try resolver adapters (for example a Bluesky-compatible profile lookup today), cache results, and fail gracefully.
+5. **Link to a feed/series** — use `atproto:feed` to add a "More from this series" action in the URL card; support both `at://` and `http(s)://`.
 
 Non-atproto clients that do not recognise these fields will simply skip them.
 
@@ -86,7 +89,6 @@ The page contains:
 
 ```
 README.md          – This file
-PLAYGROUND.md      – Example URLs and list of supporting clients
 spec/
   article.md       – Human-readable spec: fields, required/optional, client behaviour
 schema/

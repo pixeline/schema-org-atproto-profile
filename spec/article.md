@@ -6,19 +6,13 @@ Version: 0.1 (draft)
 
 ## Overview
 
-This document defines the **atproto-flavoured Article profile**: a minimal, additive extension of the Schema.org `Article` type that enables atproto clients (e.g. Bluesky) to render richer URL cards while remaining fully valid and backward-compatible Schema.org JSON-LD.
+This document defines the **atproto-flavoured Article profile**: a minimal, additive extension of the Schema.org `Article` type that enables websites and applications, including atproto clients (e.g. Bluesky) to render richer URL cards while remaining fully valid and backward-compatible Schema.org JSON-LD.
 
 ### Goals
 
 - Provide a single, copy-pasteable JSON-LD template publishers can drop into existing CMS templates.
-- Carry enough atproto identity data (DID, handle) for a client to display an author avatar or offer a "Follow" button.
+- Carry enough atproto identity data (DID, handle) for a client to display identity context or offer a "Follow" button.
 - Optionally point to a feed or series so clients can show a "More from this series" link.
-
-### Non-goals
-
-- This profile does **not** replace Open Graph tags; publishers may keep both.
-- This profile does **not** define a Lexicon or any atproto record type — it is purely a convention for structured data embedded in HTML pages.
-- This profile does **not** cover `VideoObject`, `AudioObject`, or other Schema.org types in this version.
 
 ---
 
@@ -49,6 +43,7 @@ All standard fields are used exactly as Schema.org defines them. The following s
 | `author.@type` | string | Recommended | Should be `"Person"`. |
 | `author.name` | string | Recommended | The author's display name. |
 | `author.url` | string | Optional | URL of the author's profile or homepage. |
+| `author.image` | string | Optional | Absolute URL for the author's avatar/profile image. Prefer this for straightforward client rendering. |
 
 ### atproto-specific fields
 
@@ -56,9 +51,9 @@ These fields are defined under the `atproto:` namespace. They are **optional** �
 
 | Field | Location | Type | Description |
 |---|---|---|---|
-| `atproto:did` | `author` object | string | The author's atproto DID, e.g. `"did:plc:abc123xyz456"`. Clients can use this to fetch the author's avatar or offer a Follow action. |
+| `atproto:did` | `author` object | string | The author's atproto DID, e.g. `"did:plc:abc123xyz456"`. Clients can use this as a stable identity anchor for follow actions and resolver adapters. |
 | `atproto:handle` | `author` object | string | The author's atproto handle, e.g. `"alice.bsky.social"`. Used for display and deep-linking. |
-| `atproto:feed` | root object | string | AT URI of a feed/series, e.g. `"at://did:plc:…/app.bsky.feed.generator/my-series"`. Clients may show a "More from this series" link. |
+| `atproto:feed` | root object | string | Feed/series link. Must be either an `at://` URI (e.g. `"at://did:plc:…/app.bsky.feed.generator/my-series"`) or an absolute `http(s)://` URL. Clients may show a "More from this series" link. |
 
 ---
 
@@ -78,6 +73,7 @@ These fields are defined under the `atproto:` namespace. They are **optional** �
     "@type": "Person",
     "name": "Alice Dubois",
     "url": "https://example.com/authors/alice",
+    "image": "https://example.com/images/alice.jpg",
     "atproto:did": "did:plc:abc123xyz456",
     "atproto:handle": "alice.bsky.social"
   },
@@ -93,6 +89,7 @@ These fields are defined under the `atproto:` namespace. They are **optional** �
 2. **Omit atproto fields** entirely if you do not have an atproto identity — the document remains valid Schema.org JSON-LD.
 3. **Keep `image` as an array**, even if there is only one image, for forward compatibility.
 4. **Use absolute URLs** for `image` and `author.url`.
+5. **Prefer `author.image` when available** — it is the simplest cross-client way to provide an avatar without requiring resolver-specific logic.
 
 ## Notes for clients
 
@@ -100,3 +97,6 @@ These fields are defined under the `atproto:` namespace. They are **optional** �
 2. **Gracefully handle missing fields** — treat any atproto field as optional and never fail card rendering if they are absent.
 3. **Do not rely on field ordering** inside the JSON object.
 4. **Shorten DIDs for display** — DIDs can be long; show only the first 12–20 characters when space is limited.
+5. **Prefer standard avatar fields first** — use `author.image` when present.
+6. **Use resolver adapters as a client-layer fallback** — when `author.image` is absent, clients may resolve avatars through implementation-specific adapters (for example, a Bluesky-compatible profile lookup), with caching and graceful failure.
+7. **Accept both feed URI forms** — treat `atproto:feed` as valid when it is either `at://` or absolute `http(s)://`.
