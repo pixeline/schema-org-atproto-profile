@@ -72,6 +72,10 @@ Non-atproto clients that do not recognise these fields will simply skip them.
 
 ## Demo
 
+Live demo (GitHub Pages):
+
+https://pixeline.github.io/schema-org-atproto-profile/
+
 Open `demo/index.html` directly in a browser (no server needed):
 
 ```
