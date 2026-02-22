@@ -1,6 +1,8 @@
-# schema-org-atproto-profile
+# Schema.org atproto profile
 
 A minimal, additive Schema.org profile that adds atproto-flavoured metadata to web pages so atproto clients (Bluesky, etc.) can render richer URL cards.
+
+This proposal was sparked by  [this discussion on the atproto community discourse](https://discourse.atprotocol.community/t/ideas-on-extending-open-graph-embed-displays-for-atproto/631/9)
 
 ---
 
@@ -66,7 +68,7 @@ The profile uses a dual `@context`:
 4. **Polyfill avatar resolution when missing** — if `author.image` is absent, try resolver adapters (for example a Bluesky-compatible profile lookup today), cache results, and fail gracefully.
 5. **Link to a feed/series** — use `atproto:feed` to add a "More from this series" action in the URL card; support both `at://` and `http(s)://`.
 
-Non-atproto clients that do not recognise these fields will simply skip them.
+Clients that do not recognise these fields will simply skip them.
 
 ---
 
@@ -82,26 +84,3 @@ The page contains:
 
 Preview:
 ![preview](./demo/capture.jpg)
-
-
----
-
-## Repository structure
-
-```
-README.md          – This file
-spec/
-  article.md       – Human-readable spec: fields, required/optional, client behaviour
-schema/
-  article.jsonld   – Copy-pasteable JSON-LD template (empty values)
-demo/
-  index.html       – Fake blog post with embedded JSON-LD
-  styles.css       – Card layout styles
-  card-demo.js     – Reads JSON-LD, builds card, adds atproto UI bits
-```
-
----
-
-## Status
-
-Early draft — feedback welcome via issues or the [atproto community discourse thread](https://discourse.atprotocol.community/t/ideas-on-extending-open-graph-embed-displays-for-atproto/631/9).
